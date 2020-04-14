@@ -1,0 +1,225 @@
+---
+output: pdf_document
+header-includes:
+- \usepackage{pdflscape}
+- \newcommand{\blandscape}{\begin{landscape}}
+- \newcommand{\elandscape}{\end{landscape}}
+- \usepackage[normalem]{ulem}
+- \useunder{\uline}{\ul}{}
+geometry: margin=1in
+---
+
+\fontfamily{qtm}
+\fontsize{12}{12}
+\selectfont
+
+```{r setup, include=FALSE}
+#- \usepackage{setspace}\doublespacing
+knitr::opts_chunk$set(echo = F)
+library(stargazer)
+```
+
+
+\begin{centering}
+CGU School of Politics and Economics\\
+CGU Economics Department\\
+ECON 382 Econometrics 1\\
+Spring 2020\\
+\end{centering}
+
+\vspace{0.5cm}
+\textbf{Contact Information}
+
+\noindent\rule{15cm}{0.4pt}
+
+\textbf{Course Instructor:} Hisam Sabouni
+
+\textbf{Phone Contact:} (949) 302 6058
+
+\textbf{Email:} hisam.sabouni@cgu.edu
+
+\textbf{Office Hours:} By appointment
+
+\textbf{Teaching Assistant:} Uyen (Yunie) Le 
+
+\textbf{Teaching Assitant Email:} uyen.le\@cgu.edu
+
+\vspace{0.5cm}
+\textbf{Course Schedule}
+
+\noindent\rule{15cm}{0.4pt}
+
+\textbf{Semester start/end dates:} 01/21/2020 to 05/16/2020
+
+\textbf{Meeting day, time:} Monday 1-3:50PM
+
+\textbf{Course Location:} McManus 35
+
+\vspace{0.5cm}
+\textbf{Course Description}
+
+\noindent\rule{15cm}{0.4pt}
+
+ECON 382 is the first econometrics course at the graduate level. The course focuses on the basic econometric theory with computer applications. We will cover all of the traditional econometrics technique starting from the simple and the multiple regression models to the simultaneous equation system estimation. In addition, we will introduce more advanced models which utilize longitudinal samples. In all these models, the emphasis will be on statistical inference and we will also pay attention to the application of the models in industrial organization, labor, health, and elsewhere in economics and social sciences. It is hoped that throughout the course, students will gain a thorough knowledge and understanding of econometrics theory and also develop useful skills in applying the methods to the empirical work. The focus will be on empirical work rather
+than on theoretical topics.
+
+\vspace{0.5cm}
+\textbf{Background Preparations}
+
+\noindent\rule{15cm}{0.4pt}
+
+Basic knowledge of probability and statistics along with knowledge of differential and integral calculus. 
+
+\vspace{2.5cm}
+
+\textbf{Texts}
+
+\noindent\rule{15cm}{0.4pt}
+
+\emph{Required:} 
+
+* Wooldridge, (2012). Introductory Econometrics: A Modern Approach. ISBN-13: 978-1111531041
+
+\emph{Optional:} 
+
+* Wooldridge, (2010). \emph{Econometric Analysis of Cross Section and Panel Data}. ISBN-13: 978-0262232586.
+
+* Tsay, (2010). \emph{Analysis of Financial Time Series}. ISBN-13: 9780470414354.
+
+* James, Witten, Hastie, and Tibshirani (2017). \emph{An Introduction to Statistical Learning: with Applications in R}. ISBN-13: 9781461471370.
+
+\vspace{0.5cm}
+\textbf{Student Learning Outcomes:}
+
+\noindent\rule{15cm}{0.4pt}
+
+By the end of this course, students will be able to:
+
+\begin{enumerate}
+
+\item Understand the different types of data that economists work with such as cross-sectional, panel, time-series, and alternative data sets. Students will learn how to manipulate data structures and understand the implications of the structure of the data they are using on the models they estimate.
+
+\item Understand the foundations of multiple linear regression. Students will learn the core assumptions of regression analysis and will learn to how to interpret a variety of regression estimates.
+
+\item Conduct tests of statistical inference and learn the limitation of tests of statistical inference. We will cover topics of hypothesis testing under a variety of assumptoins. 
+
+\item Learn to gather and process data from alternative sources to extract meaningful statistical insights.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Course Requirements \& Assignments:}
+
+\noindent\rule{15cm}{0.4pt}
+
+The class will meet once each week on Mondays from 1:00PM-3:50PM in room McManus 35. Each class will be made up of a lecture introducing a new topic, examination of current research papers on the topic, and a programming session in R. Students are required to bring a computer to each session.
+
+Grades with plus or minus designations are at the professor’s discretion.
+
+
+```{r,results = 'asis'}
+df <- data.frame(`Letter Grade` = c('A','B','C','U'),
+                 `Grade Point` = c('4.0','3.0','2.0','0'),
+                 `Description` = c('Complete mastery of course material and additional','Complete mastery of course material','Gaps in mastery of course material; not at level expected by the program','Unsatisfactory'),
+                 `Learning Outcome` = c('Insightful','Proficient','Developing','Ineffective'))
+colnames(df) <- c('Letter Grade','Grade Point','Description','Learning Outcome')
+table <- capture.output({ # Store the stargazer output in a string
+  stargazer(df,header = F,summary = F,title = 'Learning Outcomes')
+})
+table <- gsub("\\begin{tabular}","\\resizebox{\\textwidth}{!}{\\begin{tabular}", table,fixed=T)
+table <- gsub("\\end{tabular}","\\end{tabular}}", table,fixed=T)
+cat(table)
+```
+
+
+\vspace{1.1cm}
+
+Grades will be determined by performance in four sections with equal weights as follows:
+
+* Assignments: 25\%
+* Research Paper: 25\%
+* Midterm Exam: 25\%
+* Final Exam: 25\%
+
+The midterm will be given in class in week 8, on March 11th. The group projects will be presented in class on May 4th, one week before the final exam. I will describe what is needed to complete both during the first lecture. The final exam will be given in class on May 11th.
+
+\textbf{Note:} I reserve the right to curve the final grades in order to approximate a normal distribution. 
+\textbf{Preliminary Topic Schedule}
+For each of the topics below we will be using a class lecture which will act as supplementary material to the information presented in the text book. 
+
+\noindent\rule{15cm}{0.4pt}
+
+\begin{enumerate}
+
+\item Review of statistics in R: Wooldridge Appendix B
+
+\item Review of statistical inference and simple linear regression: Wooldridge Appendix C and Chapter 1
+
+\item Multiple linear regression estimation and infference: Wooldridge Chapters 3 and 4
+
+\item Multiple linear regression asymptotics and issues: Wooldridge Chapters 5 and 6
+
+\item Multiple linear regression qualitative variables and heteroskedasticity: Wooldridge Chapters 7 and 8
+
+\item \textbf{Midterm Exam}
+
+\item Building Webscrapers and collecting data from the internet
+
+\item Binary choice models. Linear probability models, logistic regression, probit regression, and machine learning classifiers: Woooldridge Chapter 17
+
+\item Dealing with spatial data and introduction to geographical information systems 
+
+\item Instrumental variables estimation: Wooldridge Chapter 15
+
+\item \textbf{Final Exam and Term Paper}
+\end{enumerate}
+
+
+\textbf{Class Policies}
+
+The CGU institutional policies apply to each class offered at CGU. Students are encouraged to review the student handbook for their program as well as policy documentation in the Bulletin and on the Registrar’s webpages: http://bulletin.cgu.edu/ and http://www.cgu.edu/registrar.
+
+
+\textbf{Attendance}
+
+Students are expected to attend all classes. Students who are unable to attend class must seek permission for an excused absence from the course director or teaching assistant. Unapproved absences or late attendance for three or more classes may result in a lower grade or an “incomplete” for the course. If a student has to miss a class, he or she should arrange to get notes from a fellow student and is strongly encouraged to meet with the teaching assistant to obtain the missed material. Missed extra-credit quizzes and papers will not be available for re-taking.
+
+\textbf{Scientific and Professional Ethics}
+
+The work you do in this class must be your own. Feel free to build on, react to, criticize, and analyze the ideas of others but, when you do, make it known whose ideas you are working with. You must explicitly acknowledge when your work builds on someone else's ideas, including ideas of classmates, professors, and the authors you read. If you ever have questions about drawing the line between others' work and your own, ask the instructor for guidance. Exams must be completed independently and without using cell phones, tablets, or computers to search or retrieve material. Any collaboration on answers to exams, unless expressly permitted by the instructor, may result in an automatic failing grade and possible expulsion from the program.
+
+Additional information on CGU’s Policy and Procedures for Violations of Standards of Academic Integrity can be found at: https://cgu.policystat.com/policy/2194316/latest/. In addition, Honnold Mudd Library has a number of resources on academic honesty and integrity, including the following online tutorial: http://libraries.claremont.edu/achontutorial/pages/.
+
+
+\textbf{Instructor Feedback and Communication}
+
+The best way to get in touch with me is by email but I can also be reached by text message. I will try to respond to email or voice messages the same day. We can communicate by phone, text, email, videoconference, or in person on days when I am on campus.
+
+\textbf{Accommodations for Students with Disabilities}
+
+CGU is committed to creating courses that are inclusive and accessible. If you would like to request academic accommodations due to temporary or permanent disability, contact the CGU Dean of Students and Coordinator for Student Disability Services at DisabilityServices\@cgu.edu or (909) 607-9448. Reasonable accommodations are considered after you have conferred with the Office of Disability Services (ODS) and presented the required documentation of your disability to the ODS. Planning is essential, so please communicate to the ODS as soon as possible.
+
+\textbf{Mental Health Resources}
+
+Graduate school is a context where mental health struggles can arise or be exacerbated. If you ever find yourself struggling, please ask for help. If you wish to seek out campus resources, here is some basic information: https://www.cuc.claremont.edu/mcaps/
+
+Monsour Counseling and Psychological Services (MCAPS) is committed to promoting psychological wellness for all students at the Claremont Colleges. Professional and well-trained psychologists, psychiatrists, and post-doctoral and intern therapists offer support for a range of psychological issues in a confidential and safe environment.
+
+>> Phone (909) 621-8202
+
+>> After hours emergency (909) 607-2000
+
+>> Tranquada Student Services Center, 1st floor
+
+>> 757 College Way
+
+>> Claremont, CA 91711
+
+
+\textbf{Title IX}
+
+One of my responsibilities as an instructor is to help create a safe learning environment. I am a mandatory reporter. Thus, if I learn of any potential violation of CGU’s gender-based misconduct policy (e.g., rape, sexual assault, dating violence, domestic violence, or stalking) by any means, I am required to notify the CGU Title IX Coordinator at Deanof.Students\@cgu.edu or (909) 607-9448. Students can request confidentiality from the institution, which I will communicate to the Title IX Coordinator. If students want to speak with someone confidentially, the following resources are available on and off campus: EmPOWER Center (909) 607-2689, Monsour Counseling and Psychological Services (909) 621-8202, and The Chaplains of the Claremont Colleges (909) 621-8685. Speaking with a confidential resource does not preclude students from making a formal report to the Title IX Coordinator if and when they are ready. Confidential resources can walk students through all of their reporting options. They can also provide students with information and assistance in accessing academic, medical, and other support services they may need.
+
+\textbf{Campus Security} Campus security can be reached 24 hours/day at (909) 607-2000.
+
+

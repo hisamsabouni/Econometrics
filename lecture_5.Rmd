@@ -1,0 +1,167 @@
+---
+title: "SIR Models"
+author: "Hisam Sabouni, PhD"
+date: "March 2020"
+output: pdf_document
+linestretch: 1.5
+header-includes: \usepackage{float}
+---
+\fontsize{12}{12}
+\fontseries{qmr}
+\selectfont
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,warning = F,message = F,fig.align="center",tidy.opts=list(width.cutoff=55),tidy=TRUE,results = 'asis',fig.pos = 'H',fig.height = 3.4)
+```
+
+This document serves as an introduction to Susceptible-Infectious-Recovered (SIR) modelling. SIR models are used by epidemiologists to undertsand the spread of disease over time across three categories:
+
+> Susceptible: Those individuals that are not immune to the infectious disease and have not yet been infected. 
+
+> Infectious: Those individuals that have been infected by the disease and have not yet 'recovered'
+
+> Recovered: Those individuals that have had the disease and have 'recovered'. Really this category represents those individuals that are no longer at risk of transmitting the disease or recieving the disease. As the individuals recover they become immune to the disease and they are no longer susceptible to the disease. On the other hand, if an individual does not recover (death) they simply fall out of the population. 
+
+Assume that at time $t$ the total population that is suscptible to the disease is denoted by $S(t)$, the total population that is infected by the disease is denoted by $I(t)$, and the total population that has 'recovered' from the disease is denoted by $R(t)$. The total population can therefore be thought of as $N(t) = S(t) + I(t) + R(t)$. These models can be summarized by a set of differential equations that describe the dynamics of the populations as the population passes through the three categories of health. 
+
+The first equation will describe how the susceptible population changes over time:
+
+\[\text{Dynamics of Susceptible Population:} \frac{dS(t)}{dt} = -\beta S(t)I(t)\]
+
+The term $\frac{dS(t)}{dt}$ is the derivative of the total susceptible population with respect to time (i.e. how the suceptible population changes over time). $\beta$ can be thought of as modeling the degree of interaction between infections and susceptible individuals. As $\beta$ increases susceptible individuals have a higher likelihood of contracting the disease from an infected invidual. Another way to think about $\beta$ is by stating that an individual has $\alpha$ interactions per day of which there is a $p$\% chance of the individual contracting the disease from each interaction, therefore $\beta = \alpha p$
+
+\[\text{Dynamics of Infectious Population:} \frac{dI(t)}{dt} = \beta S(t)I(t) - \gamma I(t)\]
+
+As individuals get infected ($\beta S(t)I(t)$) the size of the infectious population increases. Over time the infected individuals will recover by ither become immune, or, perish. The dynamics of recovery are goverend by $\gamma$. You can think of $\gamma$ as how many days it takes for an individual to recover from the disease. The smaller $\gamma$ the longer an individual is infectious. The time to recovery will be nicely summarized by $\frac{1}{\gamma}$.
+
+\[\text{Dynamics of Recovered Population:} \frac{dR(t)}{dt} = \gamma I(t)\]
+
+Lets write some code to simulate the model over time and see how an infectious disease can spread throughout the population. Let's assume the following initial starting conditions
+
+> A total susceptible population of 100,000 individuals. 
+
+> An initial number of 10 infected individuals (1\%). 
+
+> A time to recovery of 14-days $\rightarrow\ \gamma = 1/14$
+
+> An average of 50 interactions per day ($\alpha = 50$) of which there is a 1 per 30,000,000 chance of contracting the disease from an interaction ($p = 0.01$).
+
+Given these paramaters the epedimelogical spread is given by $R_{0} = N \frac{\beta}{\gamma}$, which measures the rate of infection to recovery. A higher $R_{0}$ indicates that a disease is more infectious. COVID-19 estimats for $R_{0}$ are in the range of 2 to 4. Our generic parameters give an $R_{0} \approx 2.3$.
+
+```{r}
+#Susceptible population at time t
+S_t <- 100000
+#Infected population at time t
+I_t <- 10
+#initial recovered poulation at time t
+R_t <- 0 
+#Total population
+N <- S_t + I_t + R_t
+
+#Recovery (14-days)
+gamma <- 1/14
+#Population average interactions
+alpha <- 50
+#Likelihood of contraction from a given interaction 
+p <- 1/30000000
+
+beta <- alpha * p
+R_naught <-  N * beta/gamma
+
+days_to_simulate <- 200
+
+for(i in 1:days_to_simulate){
+  #Simulate change in susceptible population at time t
+  dStDt <- -1 * beta * I_t[i] * S_t[i]
+  #Simulate change in infected poulation at time t
+  dItDt <-  beta * I_t[i] * S_t[i] - gamma * I_t[i]
+  #Simulate change in recovered population at time t
+  dRtDt <- gamma * I_t[i]
+  
+  #Add in the changes to the existing level and store for the next period
+  S_t <- append(S_t, S_t[i] + dStDt)
+  I_t <- append(I_t, I_t[i] + dItDt)
+  R_t <- append(R_t, R_t[i] + dRtDt)
+}
+plot(0:days_to_simulate,S_t,xlab='Time',ylab='Susceptible Population',main='SIR',type='l',ylim=c(0,N))
+lines(0:days_to_simulate,I_t, col = 2)
+lines(0:days_to_simulate,R_t, col = 4)
+legend('bottomleft',legend = c('Susceptible','Infected','Recovered'),col = c(1,2,4),lty = 1,cex = 0.6)
+```
+
+As you can see from the plot above even with the very low probability of contraction of the disease from any given interaction within about 100-days the number of infected indivuals peaks at almost 20\% of the population having the disease. By day 100 almost 40\% of the population has already had the disease and began to recover. 
+
+We can also track the percentage of the population getting the number of new cases per day by looking at the changes in $S(t)$ relative to the total population size. 
+
+```{r}
+#New infections per day S(t - 1) - S(t)
+plot((S_t[1:(length(S_t) - 1)] - S_t[2:length(S_t)])/N,xlab='Time',ylab='New Infections Per Day',main='Percent of Population',typ='l')
+```
+
+
+Now, what happens if we impose an intervention where we tell all individuals to stay home. That is we greatly reduce the number of interactions an individual has per day from say 50 to 30 on day 80 into the spread of the disease. 
+
+
+```{r}
+options(scipen = 10)
+#Susceptible population at time t
+S_t <- 100000
+#Infected population at time t
+I_t <- 10
+#initial recovered poulation at time t
+R_t <- 0 
+#Total population
+N <- S_t + I_t + R_t
+
+#Recovery (14-days)
+gamma <- 1/14
+#Population average interactions
+alpha <- 50
+#Likelihood of contraction from a given interaction 
+p <- 1/30000000
+
+beta <- alpha * p
+R_naught <-  N * beta/gamma
+
+days_to_simulate <- 200
+cut_interactions_date <- 60
+for(i in 1:days_to_simulate){
+  if(i >= cut_interactions_date){
+    #Population average interactions drops from 50 to ..
+    alpha <- 30
+    #Likelihood of contraction from a given interaction 
+    p <- 1/30000000
+    beta <- alpha * p
+  }
+  #Simulate change in susceptible population at time t
+  dStDt <- -1 * beta * I_t[i] * S_t[i]
+  #Simulate change in infected poulation at time t
+  dItDt <-  beta * I_t[i] * S_t[i] - gamma * I_t[i]
+  #Simulate change in recovered population at time t
+  dRtDt <- gamma * I_t[i]
+  
+  
+  #Add in the changes to the existing level and store for the next period
+  S_t <- append(S_t,S_t[i] + dStDt)
+  I_t <- append(I_t,I_t[i] + dItDt)
+  R_t <- append(R_t, R_t[i] + dRtDt)
+}
+plot(0:days_to_simulate,S_t,xlab='Time',ylab='Susceptible Population',main='SIR',type='l',ylim=c(0,N))
+lines(0:days_to_simulate,I_t, col = 2)
+lines(0:days_to_simulate,R_t, col = 4)
+legend('bottomleft',legend = c('Susceptible','Infected','Recovered'),col = c(1,2,4),lty = 1,cex = 0.6)
+abline(v = cut_interactions_date,lty = 2)
+#New infections per day S(t - 1) - S(t)
+plot((S_t[1:(length(S_t) - 1)] - S_t[2:length(S_t)])/N,xlab='Time',ylab='New Infections Per Day',main='Percent of Population',typ='l')
+```
+
+
+By simply reducing the number of interactions we can greatly reduce the spread of the disease. 
+
+
+
+
+
+
+
+

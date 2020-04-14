@@ -8,20 +8,25 @@ If you have any questions feel free to email me at hisam.sabouni@cgu.edu
 
 I am a Clinical Assistant Professor at Claremont Graduate Universtiy in the department of economic sciences.
 
-[Lecture 1: An introduction to macroeconomics with R](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_1.pdf)
+[Lecture 1: An Introduction to Econometrics with R](https://github.com/hisamsabouni/econometrics/blob/master/lecture_1_382.pdf)
 
-[Lecture 2: Money, inflation, and interest rates](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_2.pdf)
+[Lecture 2: Estimators and their Properties](https://github.com/hisamsabouni/econometrics/blob/master/lecture_2.pdf)
 
-[Lecture 3: Unemployment models](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_3.pdf)
+[Lecture 3: Introduction to Ordinary Least Squares](https://github.com/hisamsabouni/econometrics/blob/master/lecture_3.pdf)
 
-[Lecture 4: Long-Run Economic Growth: Solow-Swan Model](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_4.pdf)
+[Lecture 4: Ordinary Least Squares Properties and Derivations with Matrices](https://github.com/hisamsabouni/econometrics/blob/master/lecture_4.pdf)
 
-[Lecture 5: Analyzing Economic Growth and Endogenous Growth Theory](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_5.pdf)
+[Lecture 5: Susceptible-Infectious-Recovered (SIR) modelling](https://github.com/hisamsabouni/econometrics/blob/master/lecture_5.pdf)
 
-[Lecture 6: Open Economies and Exchange Rates](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_6.pdf)
+[YouTube Link for Lecture 5: Susceptible-Infectious-Recovered (SIR) modelling](https://youtu.be/IwO4x3vUFzQ)
 
-[Lecture 7: New Keynsian Phillips Curve, Natural Rate of Unemployment (NAIRU), IS-LM, Aggregate Demand, and Impulse Reponse Functions](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_7.pdf)
+[Lecture 6: Regression Interpretation and Diagnostics](https://github.com/hisamsabouni/econometrics/blob/master/lecture_6.pdf)
 
-[Lecture 8: Time-Series Econometrics for Macroeconomic Analysis](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_8.pdf)
+[YouTube Link Part 1 for Lecture 6: Regression Interpretation and Diagnostics](https://youtu.be/L8CnzhGaGoM)
 
-[Lecture 9: Macroeconomic Indicators During Recessions](https://github.com/hisamsabouni/macroLectures/blob/master/lecture_9.pdf)
+[YouTube Link Part 2 for Lecture 6: Regression Interpretation and Diagnostics](https://youtu.be/azEp2bw2X3c)
+
+[Lecture 7:  Economic Data Sources and Web Scraping](https://github.com/hisamsabouni/econometrics/tree/master/lecture_7)
+
+[YouTube Link Part 1 for Lecture 7:  Economic Data Sources and Web Scraping](https://youtu.be/GfDxUJlvd2U)
+

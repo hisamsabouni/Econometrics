@@ -18,15 +18,15 @@ I am a Clinical Assistant Professor at Claremont Graduate Universtiy in the depa
 
 [Lecture 5: Susceptible-Infectious-Recovered (SIR) modelling](https://github.com/hisamsabouni/econometrics/blob/master/lecture_5.pdf)
 
-[YouTube Link for Lecture 5: Susceptible-Infectious-Recovered (SIR) modelling](https://youtu.be/IwO4x3vUFzQ)
+> [YouTube Link for Lecture 5: Susceptible-Infectious-Recovered (SIR) modelling](https://youtu.be/IwO4x3vUFzQ)
 
 [Lecture 6: Regression Interpretation and Diagnostics](https://github.com/hisamsabouni/econometrics/blob/master/lecture_6.pdf)
 
-[YouTube Link Part 1 for Lecture 6: Regression Interpretation and Diagnostics](https://youtu.be/L8CnzhGaGoM)
+> [YouTube Link Part 1 for Lecture 6: Regression Interpretation and Diagnostics](https://youtu.be/L8CnzhGaGoM)
 
-[YouTube Link Part 2 for Lecture 6: Regression Interpretation and Diagnostics](https://youtu.be/azEp2bw2X3c)
+> [YouTube Link Part 2 for Lecture 6: Regression Interpretation and Diagnostics](https://youtu.be/azEp2bw2X3c)
 
 [Lecture 7:  Economic Data Sources and Web Scraping](https://github.com/hisamsabouni/econometrics/tree/master/lecture_7)
 
-[YouTube Link Part 1 for Lecture 7:  Economic Data Sources and Web Scraping](https://youtu.be/GfDxUJlvd2U)
+> [YouTube Link Part 1 for Lecture 7:  Economic Data Sources and Web Scraping](https://youtu.be/GfDxUJlvd2U)
 
